@@ -51,8 +51,9 @@ const callback = async (URL) => {
   }
 };
 
-chrome.runtime.onMessage.addListener((request) => {
+browser.runtime.onMessage.addListener(request => {
   callback(request.url);
+  return Promise.resolve();
 });
 
 callback(window.location.href);

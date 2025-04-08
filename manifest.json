@@ -2,26 +2,33 @@
   "name": "Youtube Detox: Reclaim Your Time, Stay Focused!",
   "description": "It helps eliminate distractions by removing unwanted suggested videos from the YouTube homepage and video watch pages.",
   "version": "1.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "icons": {
     "16": "/images/16.png",
     "32": "/images/32.png",
     "48": "/images/48.png",
     "128": "/images/128.png"
   },
-  "action": {
+  "browser_action": {
     "default_popup": "hello.html"
   },
-  "host_permissions": ["https://www.youtube.com/*"],
-  "permissions": ["webNavigation"],
+  "permissions": [
+    "webNavigation",
+    "*://*.youtube.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
+      "matches": ["*://*.youtube.com/*"],
       "js": ["content.js"],
       "css": ["style.css"]
     }
   ],
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-detox@example.com"
+    }
   }
 }
